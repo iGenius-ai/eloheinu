@@ -37,7 +37,7 @@ const SignUp = () => {
     e.preventDefault();
     setIsLoading(true);
   
-    const request = axios.post('https://eh-server-u0sl.onrender.com/auth/register', formData);
+    const request = axios.post('https://elh-server.onrender.com/auth/register', formData);
   
     toast.promise(
       request,
