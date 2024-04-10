@@ -2,7 +2,7 @@ import React from 'react'
 import site8 from "../../public/images/sites/site8.png";
 import Image from 'next/image';
 import { Prata } from 'next/font/google'
-const prata = Prata({ subsets: ['latin'] })
+const prata = Prata({ subsets: ['latin'], weight: ['400'] });
 
 const About = () => {
   return (

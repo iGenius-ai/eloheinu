@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link';
 import MajorSites from './MajorSites';
 import { Prata } from 'next/font/google'
-const prata = Prata({ subsets: ['latin'] })
+const prata = Prata({ subsets: ['latin'], weight: ['400'] });
 
 const Investment = () => {
   return (

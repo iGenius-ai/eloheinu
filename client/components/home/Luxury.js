@@ -4,7 +4,7 @@ import rwanda from "../../public/images/rwanda.png";
 import kenya from "../../public/images/kenya.png";
 import Image from 'next/image';
 import { Prata } from 'next/font/google'
-const prata = Prata({ subsets: ['latin'] })
+const prata = Prata({ subsets: ['latin'], weight: ['400'] });
 
 
 const Luxury = () => {
