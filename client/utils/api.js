@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://eh-server-u0sl.onrender.com/user', // Replace with your server URL
+  baseURL: 'https://elh-server.onrender.com/user', // Replace with your server URL
 });
 
 export const setAuthToken = (token) => {

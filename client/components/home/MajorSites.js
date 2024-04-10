@@ -14,13 +14,15 @@ import site12 from "../../public/images/sites/site12.png";
 import site13 from "../../public/images/sites/site13.png";
 import Image from 'next/image';
 import Link from 'next/link';
+import { Prata } from 'next/font/google'
+const prata = Prata({ subsets: ['latin'] })
 
 const MajorSites = () => {
   return (
     <>
       <section className='px-12 mt-24 pb-24 luxury max-md:px-6'>
         <div className='text-center flex flex-col items-center'>
-          <h2 className={`text-[2rem] font-light mb-2 max-md:text-2xl`}>Major Locations On The Site</h2>
+          <h2 className={`${prata.className} text-[2rem] font-light mb-2 max-md:text-2xl`}>Major Locations On The Site</h2>
         </div>
 
         <div className="wrapper max-md:px-0">

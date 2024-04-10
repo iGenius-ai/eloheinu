@@ -15,7 +15,7 @@ const PropApp = () => {
   const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    axios.get(`https://eh-server-u0sl.onrender.com/listings/list/${_id}`).then(response => {
+    axios.get(`https://elh-server.onrender.com/listings/list/${_id}`).then(response => {
       const list = response.data.data;
       setListData(list);
       setIsLoading(false); // Set loading to false after data is fetched

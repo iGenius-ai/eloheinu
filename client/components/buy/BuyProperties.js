@@ -9,7 +9,7 @@ const BuyProperties = () => {
   const [totalListings, setTotalListings] = useState(0);
 
   useEffect(() => {
-    axios.get('https://eh-server-u0sl.onrender.com/listings/').then(response => {
+    axios.get('https://elh-server.onrender.com/listings/').then(response => {
       const list = response.data.lists;
       setListData(list);
       setTotalListings(list.length);

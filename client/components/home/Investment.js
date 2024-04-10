@@ -1,13 +1,15 @@
 import React from 'react'
 import Link from 'next/link';
 import MajorSites from './MajorSites';
+import { Prata } from 'next/font/google'
+const prata = Prata({ subsets: ['latin'] })
 
 const Investment = () => {
   return (
     <>
       <section className='px-12 mt-24 max-md:px-6'>
         <div className='text-center mb-10 flex flex-col items-center'>
-          <h2 className={`text-[2rem] font-light mb-2`}>Investment</h2>
+          <h2 className={`${prata.className} text-[2rem] font-light mb-2`}>Investment</h2>
           <p className='font-light text-sm max-w-[75ch] text-gray-600'>
             Our mission is simply to set the industry standard in investment consulting services for all 
             kinds of investors. Providing a complete range of investment opportunities for our clients, 

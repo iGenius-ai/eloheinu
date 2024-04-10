@@ -1,12 +1,14 @@
 import React from 'react'
 import site8 from "../../public/images/sites/site8.png";
 import Image from 'next/image';
+import { Prata } from 'next/font/google'
+const prata = Prata({ subsets: ['latin'] })
 
 const About = () => {
   return (
     <section className='px-12 mt-24 pb-24 luxury max-md:px-6'>
       <div className='text-center mb-10 flex flex-col items-center'>
-        <h2 className={`text-[2rem] font-light mb-2`}>About Us</h2>
+        <h2 className={`${prata.className} text-[2rem] font-light mb-2`}>About Us</h2>
         <p className='font-light text-sm max-w-[75ch] text-gray-600'>
           Eloheinu real estate are passionate about providing you with the opportunity to own and purchase 
           properties across east africa countries like Nigeria, Kenya, Rwanda with the Best prices and flexible 

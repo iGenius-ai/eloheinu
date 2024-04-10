@@ -3,13 +3,16 @@ import nigeria from "../../public/images/nigeria.png";
 import rwanda from "../../public/images/rwanda.png";
 import kenya from "../../public/images/kenya.png";
 import Image from 'next/image';
+import { Prata } from 'next/font/google'
+const prata = Prata({ subsets: ['latin'] })
+
 
 const Luxury = () => {
   return (
     <>
       <section className='px-12 mt-24 pb-24 luxury max-md:px-6'>
         <div className='text-center mb-10'>
-          <h2 className='max-md:text-[1.5rem] text-[2rem] font-semibold mb-2'>Locations With Over 3000 Listings</h2>
+          <h2 className={`${prata.className} max-md:text-[1.5rem] text-[2rem] font-semibold mb-2`}>Locations With Over 3000 Listings</h2>
           <p className='font-light text-sm'>A best choice property and a comprehensive legal protection is 100% possible</p>
         </div>
         <div className="flex items-center justify-center gap-4 max-md:block">

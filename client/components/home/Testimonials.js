@@ -1,13 +1,15 @@
 import React from 'react'
 import Image from 'next/image';
 import site1 from "../../public/images/sites/site1.png";
+import { Prata } from 'next/font/google'
+const prata = Prata({ subsets: ['latin'] })
 
 const Testimonials = () => {
   return (
     <>
       <section className='px-12 mt-24 pb-24 luxury max-md:px-6'>
         <div className='text-center'>
-          <h2 className='text-[2rem] font-normal mb-2'>Testimonials</h2>
+          <h2 className={`${prata.className} text-[2rem] font-normal mb-2`}>Testimonials</h2>
         </div>
         <div className="p-4 flex items-center justify-center gap-4 max-md:block">
           <div className='bg-[#33BEFF0F] h-[280px] rounded-md p-8 flex flex-col gap-4 justify-start items-start max-md:mb-2'>

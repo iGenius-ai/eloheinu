@@ -1,14 +1,12 @@
 "use client"
 
 import Hero from "@/components/Hero";
-import Location from "@/components/Location";
 import Navbar from "@/components/Navbar";
 import About from "@/components/home/About";
 import Investment from "@/components/home/Investment";
 import Luxury from "@/components/home/Luxury";
 import Testimonials from "@/components/home/Testimonials";
 import Featured from "@/components/others/Featured";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import api, { setAuthToken } from '@/utils/api';
 import Footer from "../footer/Footer";
@@ -17,7 +15,6 @@ import axios from "axios";
 const App = () => {
   const [user, setUser] = useState({});
   const [listData, setListData] = useState([]);
-  const router = useRouter();
 
   useEffect(() => {
     // Retrieve the token from localStorage or cookie
@@ -33,11 +30,11 @@ const App = () => {
           setUser(response.data);
         })
         .catch((error) => {
-          router.push('/');
+          console.error(error);
         });
     }
 
-    axios.get(`https://eh-server-u0sl.onrender.com/listings/`).then(response => {
+    axios.get(`https://elh-server.onrender.com/listings/`).then(response => {
       const list = response.data.lists;
       setListData(list);
     }).catch(error => {

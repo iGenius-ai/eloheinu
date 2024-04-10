@@ -30,7 +30,7 @@ const ListingHeader = () => {
           setUser(response.data);
         })
         .catch((error) => {
-          console.error('Error fetching user profile:', error.response.data.message);
+          router.push('/auth/login');
         });
     }
   }, []);

@@ -10,7 +10,7 @@ const Featured = ({ listData }) => {
     <>
       <section className='px-12 mt-24 pb-24 luxury max-md:px-6'>
         <div className='text-center mb-10'>
-          <h2 className='text-[2rem] font-light mb-2'>Featured Luxury Properties</h2>
+          <h2 className={`${prata.className} text-[2rem] font-light mb-2`}>Featured Luxury Properties</h2>
         </div>
         <div className="grid grid-cols-3 gap-4 max-md:block">
           

@@ -28,7 +28,7 @@ const Overview = ({ user }) => {
       router.push('/auth/signin');
     }
 
-    axios.get(`https://eh-server-u0sl.onrender.com/listings/?limit=${limit}&skip=${skip}`).then(response => {
+    axios.get(`https://elh-server.onrender.com/listings/?limit=${limit}&skip=${skip}`).then(response => {
       const list = response.data.lists;
       setListData(list);
     }).catch(error => {
@@ -41,11 +41,11 @@ const Overview = ({ user }) => {
     formData.append('file', image);
     formData.append('upload_preset', preset);
     try {
-      const res = await axios.post('http://localhost:5000/listings/upload', formData);
+      const res = await axios.post('https://elh-server.onrender.com/listings/upload', formData);
       const imageUrl = res.data.secure_url;
 
       console.log(res, imageUrl);
-      const image = await axios.post('http://localhost:5000/listings/upload', {
+      const image = await axios.post('https://elh-server.onrender.com/listings/upload', {
         imageUrl
       });
       setImage(image.data);
@@ -58,7 +58,7 @@ const Overview = ({ user }) => {
     const confirmDelete = window.confirm(`Are you sure you want to delete ${list.propertyName}?`);
 
     if (confirmDelete) {
-      const request = axios.get(`http://localhost:5000/listing/list/delete/${list._id}`, {
+      const request = axios.get(`https://elh-server.onrender.com/listing/list/delete/${list._id}`, {
         headers: {
           'Authorization': `Bearer ${authToken}`
         }

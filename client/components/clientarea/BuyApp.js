@@ -16,7 +16,7 @@ const BuyApp = () => {
   const router = useRouter();
 
   useEffect(() => {
-    axios.get('https://eh-server-u0sl.onrender.com/listings/').then(response => {
+    axios.get('https://elh-server.onrender.com/listings/').then(response => {
       const list = response.data.lists;
       setListData(list);
     }).catch(error => {
