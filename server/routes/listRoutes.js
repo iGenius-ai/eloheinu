@@ -65,9 +65,9 @@ router.post('/create', authenticateToken, async (req, res) => {
     
     // Create a new listing object with form data and image URLs
     const list = new List({
-      propertyName, propertyID: propertyId, tags: JSON.parse(req.body.tags), price,
+      propertyName, propertyID: propertyId, tags: req.body.tags, price,
       address, bedrooms, bathrooms, lenght, width, propertyType, 
-      status, features: JSON.parse(req.body.features), images: imageUrls // Cloudinary image URLs
+      status, features: req.body.features, images: imageUrls // Cloudinary image URLs
     });
 
     // Save the listing to the database
