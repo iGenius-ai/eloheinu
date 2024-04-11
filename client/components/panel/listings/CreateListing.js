@@ -186,7 +186,7 @@ const CreateListing = ({ user, authToken }) => {
               />
             </div>
           </div>
-          <div className='w-full flex items-center gap-x-4'>
+          <div className='w-full flex flex-wrap items-center gap-x-4'>
             <div className='flex items-center gap-x-4'>
               <div className='w-full'>
                 <label htmlFor="lenght" className="block font-medium text-[14px]">Length</label>
@@ -222,7 +222,7 @@ const CreateListing = ({ user, authToken }) => {
               />
             </div>
           </div>
-          <div className='w-full flex items-start gap-x-4'>
+          <div className='w-full flex flex-wrap items-start gap-x-4'>
             <div className='w-full'>
               <label htmlFor="tag" className="block font-medium text-[14px]">Tag</label>
               <select multiple

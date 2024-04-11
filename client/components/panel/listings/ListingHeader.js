@@ -39,7 +39,7 @@ const ListingHeader = () => {
     <>
       <div 
         style={{ transition: 'margin-left .3s' }}
-        className={`ml-60 h-screen relative ${rubik.className}`} id="main-content"
+        className={`max-md:ml-0 ml-60 h-screen relative ${rubik.className}`} id="main-content"
       >
         <header className='flex items-center justify-between py-4 px-8 h-14'>
           <div className="flex items-center">
