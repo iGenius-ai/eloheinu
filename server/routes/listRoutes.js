@@ -1,19 +1,12 @@
 const express = require('express');
-const multer  = require('multer');
 const fs = require('fs');
-const DataUri = require('datauri');
 const authenticateToken = require('../config/middleware');
 const List = require('../models/List');
 const { cloudinary } = require('../config/middleware/cloudinary');
-const path = require('path');
 const router = express.Router();
 
-// Set up multer storage configuration
-const upload = multer()
-const datauri = new DataUri();
-
 // Create a listing
-router.post('/create', authenticateToken, upload.array('images', 4), async (req, res) => {
+router.post('/create', authenticateToken, async (req, res) => {
   const { propertyName, address, price, bedrooms, bathrooms, lenght, width, propertyType, status } = req.body;
   const userId = req.user.userId;
 
@@ -58,8 +51,7 @@ router.post('/create', authenticateToken, upload.array('images', 4), async (req,
 
     // Upload images to Cloudinary and get URLs
     for (const file of req.files) {
-      const dataURLs = datauri.format(path.extname(file.originalname).toString(), file.buffer).content;
-      const result = await cloudinary.uploader.upload(dataURLs, uploadOptions);
+      const result = await cloudinary.uploader.upload(file.path, uploadOptions);
       imageUrls.push(result.secure_url);
     }
     
@@ -72,11 +64,6 @@ router.post('/create', authenticateToken, upload.array('images', 4), async (req,
 
     // Save the listing to the database
     await list.save();
-
-    // Delete uploaded images from the uploads directory
-    req.files.forEach(file => {
-      fs.unlinkSync(file.path);
-    });
 
     res.status(201).json({ message: 'Listing created successfully', userId });
   } catch (error) {
