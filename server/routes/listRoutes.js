@@ -56,7 +56,7 @@ router.post('/create', authenticateToken, upload.array('images', 4), async (req,
 
     // Upload images to Cloudinary and get URLs
     for (const file of req.files) {
-      const result = await cloudinary.uploader.upload(file.buffer, uploadOptions);
+      const result = await cloudinary.uploader.upload(file.buffer.toString('base64'), uploadOptions);
       imageUrls.push(result.secure_url);
     }
     

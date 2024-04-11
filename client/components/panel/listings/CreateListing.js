@@ -128,8 +128,10 @@ const CreateListing = ({ user, authToken }) => {
         error: (err) => {
           console.error(err); // Log the actual error for debugging
           if (err.response && err.response.data && err.response.data.message) {
+            setIsLoading(false)
             return err.response.data.message;
           } else {
+            setIsLoading(false)
             return 'An error occurred here';
           }
         },

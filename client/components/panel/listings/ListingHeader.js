@@ -30,7 +30,7 @@ const ListingHeader = () => {
           setUser(response.data);
         })
         .catch((error) => {
-          router.push('/auth/login');
+          router.push('/auth/signin');
         });
     }
   }, []);
