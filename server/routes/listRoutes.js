@@ -9,7 +9,7 @@ const router = express.Router();
 // Set up multer storage configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/') // Destination folder for uploaded files
+    cb(null, 'https://elh-server.onrender.com/uploads/') // Destination folder for uploaded files
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname) // Unique filename
@@ -20,7 +20,7 @@ const upload = multer({ storage: storage })
 
 // Create a listing
 router.post('/create', authenticateToken, upload.array('images', 4), async (req, res) => {
-  const { propertyName, propertyID, address, price, bedrooms, bathrooms, lenght, width, propertyType, status } = req.body;
+  const { propertyName, address, price, bedrooms, bathrooms, lenght, width, propertyType, status } = req.body;
   const userId = req.user.userId;
 
   try {
