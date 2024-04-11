@@ -1,14 +1,16 @@
 const express = require('express');
 const multer  = require('multer');
 const fs = require('fs');
+const DataUri = require('datauri');
 const authenticateToken = require('../config/middleware');
 const List = require('../models/List');
 const { cloudinary } = require('../config/middleware/cloudinary');
+const path = require('path');
 const router = express.Router();
 
 // Set up multer storage configuration
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage })
+const upload = multer()
+const datauri = new DataUri();
 
 // Create a listing
 router.post('/create', authenticateToken, upload.array('images', 4), async (req, res) => {
@@ -51,13 +53,13 @@ router.post('/create', authenticateToken, upload.array('images', 4), async (req,
     // Array to store cloudinary image URLs
     const imageUrls = [];
     const uploadOptions = {
-      folder: 'listings', // Specify your desired folder name here
-      use_filename: true
+      folder: 'listings' // Specify your desired folder name here
     };
 
     // Upload images to Cloudinary and get URLs
     for (const file of req.files) {
-      const result = await cloudinary.uploader.upload(file.buffer.toString('base64'), uploadOptions);
+      const dataURLs = datauri.format(path.extname(file.originalname).toString(), file.buffer).content;
+      const result = await cloudinary.uploader.upload(dataURLs, uploadOptions);
       imageUrls.push(result.secure_url);
     }
     
