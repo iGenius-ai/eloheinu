@@ -50,9 +50,17 @@ router.post('/create', authenticateToken, async (req, res) => {
     };
 
     // Upload images to Cloudinary and get URLs
-    for (const file of req.files) {
-      const result = await cloudinary.uploader.upload(file.path, uploadOptions);
-      imageUrls.push(result.secure_url);
+    if (req.files && Array.isArray(req.files)) {
+      for (const file of req.files) {
+        const result = await cloudinary.uploader.upload(file.path, uploadOptions);
+        imageUrls.push(result.secure_url);
+      }
+    } else if (req.files) {
+      const files = Array.isArray(req.files.files) ? req.files.files : [req.files.files];
+      for (const file of files) {
+        const result = await cloudinary.uploader.upload(file.path, uploadOptions);
+        imageUrls.push(result.secure_url);
+      }
     }
     
     // Create a new listing object with form data and image URLs
