@@ -7,15 +7,7 @@ const { cloudinary } = require('../config/middleware/cloudinary');
 const router = express.Router();
 
 // Set up multer storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'https://elh-server.onrender.com/uploads/') // Destination folder for uploaded files
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname) // Unique filename
-  }
-})
-
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage })
 
 // Create a listing
