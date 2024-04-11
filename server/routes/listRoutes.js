@@ -51,7 +51,8 @@ router.post('/create', authenticateToken, upload.array('images', 4), async (req,
     // Array to store cloudinary image URLs
     const imageUrls = [];
     const uploadOptions = {
-      folder: 'listings' // Specify your desired folder name here
+      folder: 'listings', // Specify your desired folder name here
+      use_filename: true
     };
 
     // Upload images to Cloudinary and get URLs
