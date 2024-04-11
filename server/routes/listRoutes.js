@@ -21,7 +21,7 @@ router.post('/create', authenticateToken, async (req, res) => {
       !propertyType ||
       !status
     ) {
-      return res.status(400).json({ error: 'Missing required fields' });
+      res.status(400).json({ error: 'Missing required fields' });
     }
 
     // Fetch all existing listings from the database

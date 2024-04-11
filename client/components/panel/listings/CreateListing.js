@@ -132,7 +132,7 @@ const CreateListing = ({ user, authToken }) => {
             return err.response.data.message;
           } else {
             setIsLoading(false)
-            return 'An error occurred here';
+            return 'An error occurred while handling the submission';
           }
         },
       },
