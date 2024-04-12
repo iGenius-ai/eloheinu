@@ -102,7 +102,7 @@ const CreateListing = ({ user, authToken }) => {
     }
 
     const response = axios.post(
-      'http://localhost:5000/listings/create',
+      'https://elh-server.onrender.com/listings/create',
       formData,
       {
         headers: {
