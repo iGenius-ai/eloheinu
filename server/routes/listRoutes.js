@@ -1,29 +1,21 @@
 const express = require('express');
+const multer  = require('multer');
 const fs = require('fs');
 const authenticateToken = require('../config/middleware');
 const List = require('../models/List');
 const { cloudinary } = require('../config/middleware/cloudinary');
 const router = express.Router();
 
+// Set up multer storage configuration
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage })
+
 // Create a listing
-router.post('/create', authenticateToken, async (req, res) => {
+router.post('/create', authenticateToken, upload.array('images', 4), async (req, res) => {
   const { propertyName, address, price, bedrooms, bathrooms, lenght, width, propertyType, status } = req.body;
   const userId = req.user.userId;
 
   try {
-    if (
-      !propertyName ||
-      !price ||
-      !bedrooms ||
-      !bathrooms ||
-      !lenght ||
-      !width ||
-      !propertyType ||
-      !status
-    ) {
-      res.status(400).json({ error: 'Missing required fields' });
-    }
-
     // Fetch all existing listings from the database
     const existingListings = await List.find({});
     // Extract the property IDs from the existing listings
@@ -59,38 +51,24 @@ router.post('/create', authenticateToken, async (req, res) => {
     // Array to store cloudinary image URLs
     const imageUrls = [];
     const uploadOptions = {
-      folder: 'listings' // Specify your desired folder name here
+      folder: 'listings',
+      use_filename: true, // Use the original filename
+      unique_filename: false, // Don't generate a unique filename
+      overwrite: true, // Overwrite the file if it already exists
     };
 
     // Upload images to Cloudinary and get URLs
-    if (req.files && Array.isArray(req.files)) {
-      for (const file of req.files) {
-        const result = await cloudinary.uploader.upload(file.path, uploadOptions);
-        imageUrls.push(result.secure_url);
-      }
-    } else if (req.files) {
-      const files = Array.isArray(req.files.files) ? req.files.files : [req.files.files];
-      for (const file of files) {
-        const result = await cloudinary.uploader.upload(file.path, uploadOptions);
-        imageUrls.push(result.secure_url);
-      }
+    for (const file of req.files) {
+      const fileBuffer = file.buffer.toString('base64');
+      const result = await cloudinary.uploader.upload(`data:image/png;base64,${fileBuffer}`, uploadOptions);
+      imageUrls.push(result.secure_url);
     }
     
     // Create a new listing object with form data and image URLs
     const list = new List({
-      propertyName,
-      propertyID: propertyId,
-      tags: req.body.tags ? JSON.parse(req.body.tags) : [],
-      price,
-      address,
-      bedrooms,
-      bathrooms,
-      lenght,
-      width,
-      propertyType,
-      status,
-      features: req.body.features ? JSON.parse(req.body.features) : [],
-      images: imageUrls // Cloudinary image URLs
+      propertyName, propertyID: propertyId, tags: JSON.parse(req.body.tags), price,
+      address, bedrooms, bathrooms, lenght, width, propertyType, 
+      status, features: JSON.parse(req.body.features), images: imageUrls // Cloudinary image URLs
     });
 
     // Save the listing to the database
